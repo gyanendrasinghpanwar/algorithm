@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define fr(i,n) for(long i=0;i<n;i++)
+
+// Author gyanendra singh panwar :
+//Knuth–Morris–Pratt(KMP) Pattern Matching(Substring search)
+long* temp(long a[],long n,string s)   // creating array that keeps record
+{
+	for(long i=1,j=0;i<n;)
+	{
+		if(s[i]!=s[j])
+		{
+			if(!j)
+			i++;
+			else
+			j=a[j-1];
+		}
+		else
+		a[i]=j+1,j++,i++;
+	}
+	fr(i,s.size())
+	cerr<<a[i]<<" ";
+	cout<<endl;
+	return a;
+	
+}
+
+bool kmp(long a[],long n, string sub, string str)
+{
+	for(long i=0,j=0;i<str.size() and j<sub.size(); )
+	{
+		if(str[i]==sub[j])
+		i++,j++;
+		
+		else
+		{
+			if(j)
+			j=a[j-1];
+			else
+			i++;
+		}
+		if(j==sub.size())
+		return true;
+	}
+	return false;
+}
+
+int main()
+{
+	string sub,str;
+	cin>>sub>>str;
+	long a[sub.size()],n=sub.size();
+	
+	memset(a,0,sizeof(a));
+	
+	long *p=temp(a,n,sub);
+	bool check=kmp(p,n,sub,str);
+	
+	cout<<check;
+}
+
