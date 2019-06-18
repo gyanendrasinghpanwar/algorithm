@@ -1,1 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define fr(i,n) for(ll i=0;i<n;i++)
+#define vl vector<ll>
+#define vll vector<ll,ll>
+#define vpl vector< pair<ll,ll> >
+#define pb push_back
+#define ft first
+#define sd second
+#define bn begin()
+#define ed end()
+// Author gyanendra singh panwar :
+
+class graph
+{
+	public:
+		int v;
+		list<int> *vect;
+		graph(int vertex)
+		{
+			v = vertex;
+			vect = new list<int>[v];
+		}
+		
+		void addedge(int l,int r)
+		{
+			vect[l].pb(r);
+		}
+		
+		void bfs(int s)
+		{
+			bool visited[v];
+			for(int i=0;i<v;i++)
+			visited[i]=false;
+			
+			list<int> queue;
+			list<int>::iterator i; 
+			
+			queue.pb(s);
+			visited[s]=true;
+			
+			while(!queue.empty())
+			{
+				s = queue.front(); 
+                cout << s << " "; 
+                queue.pop_front(); 
+                
+                for (i = vect[s].begin(); i != vect[s].end(); ++i) 
+                {
+                    if (!visited[*i]) 
+                    {
+                        visited[*i] = true; 
+                        queue.push_back(*i); 
+                    } 
+                } 
+			}
+			
+		}
+		
+};
+
+int main()
+{
+	int vertex;
+	cin>>vertex;     // no of vertices
+	
+	int q;
+	cin>>q;   // no of path
+	
+	graph g(vertex);
+	while(q--)
+	{
+		int l,r;    // path from l to r ;
+		cin>>l>>r;
+		
+		g.addedge(l,r);
+	}
+	g.bfs(2);
+}
 
