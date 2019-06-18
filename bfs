@@ -20,7 +20,7 @@ class graph
 		graph(int vertex)
 		{
 			v = vertex;
-			vect = new list<int>[v];
+			vect = new list<int>[v+1];
 		}
 		
 		void addedge(int l,int r)
@@ -30,7 +30,7 @@ class graph
 		
 		void bfs(int s)
 		{
-			bool visited[v];
+			bool visited[v+1];
 			for(int i=0;i<v;i++)
 			visited[i]=false;
 			
