@@ -78,7 +78,7 @@ void kruskal(struct Edge edge[])
  
 int main()
 {
-    n = 3 , e = 3 ;
+    n = 4 , e = 5 ;
      
     struct Edge edge[e];
     
