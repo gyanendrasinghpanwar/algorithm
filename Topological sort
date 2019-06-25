@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define fr(i,n) for(ll i=0;i<n;i++)
+#define vl vector<ll>
+#define vll vector<ll,ll>
+#define vpl vector< pair<ll,ll> >
+#define pb push_back
+#define ft first
+#define sd second
+#define bn begin()
+#define ed end()
+// Author gyanendra singh panwar :
+
+vector<int> *adj;
+stack<int> Stack;
+bool *visited ;
+int v ;
+
+int topologicalSortUtil(int u)
+{
+	visited[u] = 1;
+	vector<int> :: iterator itr ;
+	
+	for(itr = adj[u].bn; itr!= adj[u].ed; itr++)
+	{
+		if(!visited[*itr])
+		topologicalSortUtil(*itr);
+	}
+	
+	// Push current vertex to stack which stores result 
+    Stack.push(u) ; 
+}
+
+void toplogical_sort()
+{	
+	for(int i=0;i<v;i++)
+	if(!visited[i])
+	topologicalSortUtil(i);
+	
+	while (!Stack.empty()) 
+    { 
+        cout << Stack.top() << " "; 
+        Stack.pop(); 
+    } 
+}
+
+int main()
+{
+	v = 6;
+	adj = new vector<int>[v];
+	visited = new bool [v];
+	memset(visited , 0 , sizeof(visited) );
+	
+	adj[5].pb(2);
+	adj[5].pb(0);
+	adj[4].pb(0);
+	adj[4].pb(1);
+	adj[2].pb(3);
+	adj[3].pb(1);
+	
+	cout << "Following is a Topological Sort of the given graph \n" ;
+	toplogical_sort() ;
+}
+
